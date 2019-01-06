@@ -6,20 +6,22 @@ var LinkedList = function() {
   list.addToTail = function(value) {
     var node = Node(value);
     if(this.head === null){
-      this.tail = node;
-      this.head = node;
-      node.next = null;
+     this.head = node; 
+     this.tail = node;
     }
     else{
-  
-    } 
-  };
+    var current = this.head;
+    while(current.next !== null){
+      current = current.next;
+    }
+    current.next = node;
+    this.tail = node;
+    }  
+};
 
   list.removeHead = function() {
     var tempHead = this.head;
-    console.log('temphead:',tempHead);
     this.head = this.head.next;
-    console.log('head:',this.head);
     return tempHead;
   };
 
