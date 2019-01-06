@@ -18,13 +18,15 @@ treeMethods.contains = function(target) {
   if (this.value === target) {
     return true; 
   }
-  else {
-      if (this.children !== undefined) {
-        for (var i = 0; i < this.children.length; i++) {
-         return this.children[i].contains(target);
-      }
+  else if (this.children) {
+      for (var i = 0; i < this.children.length; i++) {
+         if(this.children[i].contains(target)){
+        return this.children[i].contains(target);
+        }
     }
+  return false;
   }
+
 };
   
 
