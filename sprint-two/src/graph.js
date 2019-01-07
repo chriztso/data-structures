@@ -14,6 +14,7 @@ this[node] = [];
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
 Graph.prototype.contains = function(node) {
 for(var prop in this){
+   console.log(prop);
   if(Number(prop) === node){
    return true;
   }
@@ -23,21 +24,23 @@ return false;
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
+ for(var prop in this){
+   if(Number(prop) === node){
+    delete this[node];
+   } 
+ };
 for(var prop in this){
   if(Number(prop) === node){
-   delete this[node];
+  for(var i = 0; i < this[prop].length; i++){
+    if(this[prop][i] === node){
+      this[prop][i].splice(i, 1);
+    }
   }
-  
-};
+}
+}
 }
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
 Graph.prototype.hasEdge = function(fromNode, toNode) {
-/*for(var prop in this){
-  if(Number(prop) === toNode){
-     this[toNode].push(fromNode);
-};
-}
-*/
   for(var prop in this){
     if(Number(prop) === toNode){
         for(var i = 0; i < this[prop].length; i++){
@@ -56,7 +59,6 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
   for(var prop in this){
     if(Number(prop) === toNode){
        this[toNode].push(fromNode);
-       console.log(this);
     }
   }
 }
