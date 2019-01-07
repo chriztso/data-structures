@@ -2,13 +2,13 @@
 
 // Instantiate a new graph
 var Graph = function() {
-// newGraph.value = {};
+
 };
 var Graph1 = new Graph();
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
 this[node] = [];
-
+console.log(this);
 };
 
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
@@ -24,19 +24,10 @@ return false;
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
- for(var prop in this){
-   if(Number(prop) === node){
-    delete this[node];
-   } 
- };
+ 
+delete this[node];
 for(var prop in this){
-  if(Number(prop) === node){
-  for(var i = 0; i < this[prop].length; i++){
-    if(this[prop][i] === node){
-      this[prop][i].splice(i, 1);
-    }
-  }
-}
+ this.removeEdge(node, prop);
 }
 }
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
@@ -61,19 +52,16 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
        this[toNode].push(fromNode);
     }
   }
+console.log(this);
 }
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-  for(var prop in this){
-    if(Number(prop) === toNode){
-       for(var i = 0; i < this[toNode].length; i++){
-         if(this[toNode][i] === fromNode){
-          this[toNode].splice(i, 1);
-         }
-       }
-    }
-  }
-};
+      this[fromNode] = this[fromNode].filter(function(x){return x !== toNode;});
+      this[toNode] = this[toNode].filter(function(x){return x !== fromNode;});
+}
+  
+  
+
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
