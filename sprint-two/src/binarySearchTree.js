@@ -53,7 +53,14 @@ bstPrototype.contains = function(value){
   }
 
 bstPrototype.depthFirstLog = function(value){
-
+var func = value;
+func(this.value);
+  if (this.left) {
+    this.left.depthFirstLog(value);
+  }
+  if (this.right) {
+    this.right.depthFirstLog(value)
+  }
 }
 
 
