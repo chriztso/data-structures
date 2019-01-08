@@ -42,33 +42,47 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) {
-  this[fromNode].push(toNode);
-  this[toNode].push(fromNode);
-}
+  
+ // if (fromNode !== undefined && toNode !== undefined) {
+   console.log(fromNode, this[fromNode], 'from')  
+  console.log(toNode,this[toNode], 'to')     
+this[fromNode].push(toNode);
+  //}
+  // if (fromNode !== undefined && toNode !== undefined) {
+  console.log(toNode,this[toNode], 'to') 
+  console.log(fromNode, this[fromNode], 'from') 
+    this[toNode].push(fromNode);
+    
+  // }
+};
+
+
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
-       console.log(this);
-      for(var i = 0; i < this[fromNode].length; i++){
-          if(this[fromNode][i] === toNode){
-            this[fromNode].splice(i, 1);
-          }
-      }
-      for(var i = 0; i < this[toNode].length; i++){
-          if(this[toNode][i] === fromNode){
-            this[toNode].splice(i, 1);
-          }
-      }
+  for (var i = 0; i < this[fromNode].length; i++) {
+    if (this[fromNode][i] === toNode) {
+      this[fromNode].splice(i, 1);
+    }
+  }
+  for (var i = 0; i < this[toNode].length; i++) {
+    if (this[toNode][i] === fromNode) {
+      this[toNode].splice(i, 1);
+    }
+  }
 
-}
+};
   
   
 
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
-  for(var prop in this){
-    cb(prop);
+  for (var prop in this) {
+    if(!isNaN(parseInt(prop))){ 
+    cb(parseInt(prop));
+    }
   }
+  
 };
 
 /*
