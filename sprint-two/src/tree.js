@@ -3,30 +3,29 @@ var Tree = function(value) {
   newTree.value = value;
   _.extend(newTree, treeMethods);
   // your code here
-  newTree.children = [];  // fix me
-
+  newTree.children = [];  
   return newTree;
 };
 
 var treeMethods = {};
 
+//O(1)
 treeMethods.addChild = function(value) {
   this.children.push(Tree(value));
 };
 
+//O(n)
 treeMethods.contains = function(target) {
   if (this.value === target) {
     return true; 
-  }
-  else if (this.children) {
-      for (var i = 0; i < this.children.length; i++) {
-         if(this.children[i].contains(target)){
+  } else if (this.children) {
+    for (var i = 0; i < this.children.length; i++) {
+      if (this.children[i].contains(target)) {
         return this.children[i].contains(target);
-        }
+      }
     }
-  return false;
+    return false;
   }
-
 };
   
 
