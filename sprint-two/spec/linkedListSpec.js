@@ -36,6 +36,11 @@ describe('linkedList', function() {
     expect(linkedList.removeHead()).to.equal(4);
   });
 
+ it('should return the value of the former head when the former head is null and removeHead is called', function() {
+    linkedList.addToTail(null);
+    expect(linkedList.removeHead()).to.equal(null);
+  });
+
   it('should contain a value that was added', function() {
     linkedList.addToTail(4);
     linkedList.addToTail(5);
